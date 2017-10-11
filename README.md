@@ -14,4 +14,4 @@ Translate and Rotate a textured object.</br>
 
 ### 4. "Projections and Coordinate system"
 Create a Perspective view of a rotating cube.</br>
-<img src="https://image.ibb.co/bKWbbG/Projections.png" width=400 height=300/>
+![](https://image.ibb.co/jMptqb/projections.gif)
