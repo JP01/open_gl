@@ -22,4 +22,4 @@ Implement a user controlled camera that allows movement through the world.</br>
 
 ### 6. "Colors"
 Create a lamp and box of different colors, ready for lighting.</br>
-![]("https://preview.ibb.co/jEgq6G/Colors.gif")
+![](https://preview.ibb.co/jEgq6G/Colors.gif)
