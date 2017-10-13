@@ -7,34 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B5114C831F908E8B00393AB9 /* libglfw.3.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B5114C821F908E8A00393AB9 /* libglfw.3.2.dylib */; };
-		B5114C881F908F6500393AB9 /* libGLEW.2.1.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B5114C841F908EDC00393AB9 /* libGLEW.2.1.0.dylib */; };
 		B5114C891F908F8500393AB9 /* libGLEW.2.1.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B5114C841F908EDC00393AB9 /* libGLEW.2.1.0.dylib */; };
 		B5114C8A1F908F9200393AB9 /* libglfw.3.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B5114C821F908E8A00393AB9 /* libglfw.3.2.dylib */; };
-		B56EFCD81F9088B60092186E /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5F27EF41F8D52C50075E0D6 /* OpenGL.framework */; };
 		B5F27EF51F8D52C50075E0D6 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5F27EF41F8D52C50075E0D6 /* OpenGL.framework */; };
 		B5FE96761F90A47900C9FBB7 /* resources in CopyFiles */ = {isa = PBXBuildFile; fileRef = B5EC020C1F909D5F00B281DA /* resources */; };
+		B5FE96771F91305700C9FBB7 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B5EC01EC1F909D4C00B281DA /* main.cpp */; };
+		B5FE96901F9130D700C9FBB7 /* etc1_utils.c in Sources */ = {isa = PBXBuildFile; fileRef = B5FE967B1F9130D700C9FBB7 /* etc1_utils.c */; };
+		B5FE96911F9130D700C9FBB7 /* image_DXT.c in Sources */ = {isa = PBXBuildFile; fileRef = B5FE967D1F9130D700C9FBB7 /* image_DXT.c */; };
+		B5FE96921F9130D700C9FBB7 /* image_helper.c in Sources */ = {isa = PBXBuildFile; fileRef = B5FE967F1F9130D700C9FBB7 /* image_helper.c */; };
+		B5FE96931F9130D700C9FBB7 /* SOIL2.c in Sources */ = {isa = PBXBuildFile; fileRef = B5FE96841F9130D700C9FBB7 /* SOIL2.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		B56EFCD91F9088B60092186E /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 1;
-		};
-		B56EFCDA1F9088B60092186E /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 7;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		B5F27EE71F8D52830075E0D6 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -60,47 +44,36 @@
 		B5114C821F908E8A00393AB9 /* libglfw.3.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglfw.3.2.dylib; path = ../../../../../../../../usr/local/Cellar/glfw/3.2.1/lib/libglfw.3.2.dylib; sourceTree = "<group>"; };
 		B5114C841F908EDC00393AB9 /* libGLEW.2.1.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libGLEW.2.1.0.dylib; path = ../../../../../../../../usr/local/Cellar/glew/2.1.0/lib/libGLEW.2.1.0.dylib; sourceTree = "<group>"; };
 		B5114C861F908F0E00393AB9 /* libgdbm.4.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libgdbm.4.dylib; path = ../../../../../../../../usr/local/Cellar/gdbm/1.13/lib/libgdbm.4.dylib; sourceTree = "<group>"; };
-		B56EFCDE1F9088B60092186E /* Camera */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Camera; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5EC01EB1F909D4C00B281DA /* Camera.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Camera.h; sourceTree = "<group>"; };
 		B5EC01EC1F909D4C00B281DA /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		B5EC01F51F909D4C00B281DA /* Shader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Shader.h; sourceTree = "<group>"; };
-		B5EC01F71F909D4C00B281DA /* etc1_utils.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = etc1_utils.c; sourceTree = "<group>"; };
-		B5EC01F81F909D4C00B281DA /* etc1_utils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = etc1_utils.h; sourceTree = "<group>"; };
-		B5EC01F91F909D4C00B281DA /* image_DXT.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = image_DXT.c; sourceTree = "<group>"; };
-		B5EC01FA1F909D4C00B281DA /* image_DXT.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = image_DXT.h; sourceTree = "<group>"; };
-		B5EC01FB1F909D4C00B281DA /* image_helper.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = image_helper.c; sourceTree = "<group>"; };
-		B5EC01FC1F909D4C00B281DA /* image_helper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = image_helper.h; sourceTree = "<group>"; };
-		B5EC01FD1F909D4C00B281DA /* jo_jpeg.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = jo_jpeg.h; sourceTree = "<group>"; };
-		B5EC01FE1F909D4C00B281DA /* pkm_helper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = pkm_helper.h; sourceTree = "<group>"; };
-		B5EC01FF1F909D4C00B281DA /* pvr_helper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = pvr_helper.h; sourceTree = "<group>"; };
-		B5EC02001F909D4C00B281DA /* SOIL2.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = SOIL2.c; sourceTree = "<group>"; };
-		B5EC02011F909D4C00B281DA /* SOIL2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOIL2.h; sourceTree = "<group>"; };
-		B5EC02021F909D4C00B281DA /* stb_image.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = stb_image.h; sourceTree = "<group>"; };
-		B5EC02031F909D4C00B281DA /* stb_image_write.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = stb_image_write.h; sourceTree = "<group>"; };
-		B5EC02041F909D4C00B281DA /* stbi_DDS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = stbi_DDS.h; sourceTree = "<group>"; };
-		B5EC02051F909D4C00B281DA /* stbi_DDS_c.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = stbi_DDS_c.h; sourceTree = "<group>"; };
-		B5EC02061F909D4C00B281DA /* stbi_ext.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = stbi_ext.h; sourceTree = "<group>"; };
-		B5EC02071F909D4C00B281DA /* stbi_ext_c.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = stbi_ext_c.h; sourceTree = "<group>"; };
-		B5EC02081F909D4C00B281DA /* stbi_pkm.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = stbi_pkm.h; sourceTree = "<group>"; };
-		B5EC02091F909D4C00B281DA /* stbi_pkm_c.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = stbi_pkm_c.h; sourceTree = "<group>"; };
-		B5EC020A1F909D4C00B281DA /* stbi_pvr.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = stbi_pvr.h; sourceTree = "<group>"; };
-		B5EC020B1F909D4C00B281DA /* stbi_pvr_c.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = stbi_pvr_c.h; sourceTree = "<group>"; };
 		B5EC020C1F909D5F00B281DA /* resources */ = {isa = PBXFileReference; lastKnownFileType = folder; path = resources; sourceTree = "<group>"; };
 		B5F27EE91F8D52830075E0D6 /* GLFW OpenGL */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "GLFW OpenGL"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5F27EF41F8D52C50075E0D6 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		B5FE967B1F9130D700C9FBB7 /* etc1_utils.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = etc1_utils.c; sourceTree = "<group>"; };
+		B5FE967C1F9130D700C9FBB7 /* etc1_utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = etc1_utils.h; sourceTree = "<group>"; };
+		B5FE967D1F9130D700C9FBB7 /* image_DXT.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = image_DXT.c; sourceTree = "<group>"; };
+		B5FE967E1F9130D700C9FBB7 /* image_DXT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = image_DXT.h; sourceTree = "<group>"; };
+		B5FE967F1F9130D700C9FBB7 /* image_helper.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = image_helper.c; sourceTree = "<group>"; };
+		B5FE96801F9130D700C9FBB7 /* image_helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = image_helper.h; sourceTree = "<group>"; };
+		B5FE96811F9130D700C9FBB7 /* jo_jpeg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jo_jpeg.h; sourceTree = "<group>"; };
+		B5FE96821F9130D700C9FBB7 /* pkm_helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pkm_helper.h; sourceTree = "<group>"; };
+		B5FE96831F9130D700C9FBB7 /* pvr_helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pvr_helper.h; sourceTree = "<group>"; };
+		B5FE96841F9130D700C9FBB7 /* SOIL2.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SOIL2.c; sourceTree = "<group>"; };
+		B5FE96851F9130D700C9FBB7 /* SOIL2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOIL2.h; sourceTree = "<group>"; };
+		B5FE96861F9130D700C9FBB7 /* stb_image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_image.h; sourceTree = "<group>"; };
+		B5FE96871F9130D700C9FBB7 /* stb_image_write.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_image_write.h; sourceTree = "<group>"; };
+		B5FE96881F9130D700C9FBB7 /* stbi_DDS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stbi_DDS.h; sourceTree = "<group>"; };
+		B5FE96891F9130D700C9FBB7 /* stbi_DDS_c.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stbi_DDS_c.h; sourceTree = "<group>"; };
+		B5FE968A1F9130D700C9FBB7 /* stbi_ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stbi_ext.h; sourceTree = "<group>"; };
+		B5FE968B1F9130D700C9FBB7 /* stbi_ext_c.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stbi_ext_c.h; sourceTree = "<group>"; };
+		B5FE968C1F9130D700C9FBB7 /* stbi_pkm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stbi_pkm.h; sourceTree = "<group>"; };
+		B5FE968D1F9130D700C9FBB7 /* stbi_pkm_c.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stbi_pkm_c.h; sourceTree = "<group>"; };
+		B5FE968E1F9130D700C9FBB7 /* stbi_pvr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stbi_pvr.h; sourceTree = "<group>"; };
+		B5FE968F1F9130D700C9FBB7 /* stbi_pvr_c.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stbi_pvr_c.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		B56EFCD51F9088B60092186E /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B5114C881F908F6500393AB9 /* libGLEW.2.1.0.dylib in Frameworks */,
-				B5114C831F908E8B00393AB9 /* libglfw.3.2.dylib in Frameworks */,
-				B56EFCD81F9088B60092186E /* OpenGL.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		B5F27EE61F8D52830075E0D6 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -117,41 +90,13 @@
 		B5EC01EA1F909D4C00B281DA /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				B5FE967A1F9130D700C9FBB7 /* SOIL2 */,
 				B5EC020C1F909D5F00B281DA /* resources */,
 				B5EC01EB1F909D4C00B281DA /* Camera.h */,
 				B5EC01EC1F909D4C00B281DA /* main.cpp */,
 				B5EC01F51F909D4C00B281DA /* Shader.h */,
-				B5EC01F61F909D4C00B281DA /* SOIL2 */,
 			);
 			path = Source;
-			sourceTree = "<group>";
-		};
-		B5EC01F61F909D4C00B281DA /* SOIL2 */ = {
-			isa = PBXGroup;
-			children = (
-				B5EC01F71F909D4C00B281DA /* etc1_utils.c */,
-				B5EC01F81F909D4C00B281DA /* etc1_utils.h */,
-				B5EC01F91F909D4C00B281DA /* image_DXT.c */,
-				B5EC01FA1F909D4C00B281DA /* image_DXT.h */,
-				B5EC01FB1F909D4C00B281DA /* image_helper.c */,
-				B5EC01FC1F909D4C00B281DA /* image_helper.h */,
-				B5EC01FD1F909D4C00B281DA /* jo_jpeg.h */,
-				B5EC01FE1F909D4C00B281DA /* pkm_helper.h */,
-				B5EC01FF1F909D4C00B281DA /* pvr_helper.h */,
-				B5EC02001F909D4C00B281DA /* SOIL2.c */,
-				B5EC02011F909D4C00B281DA /* SOIL2.h */,
-				B5EC02021F909D4C00B281DA /* stb_image.h */,
-				B5EC02031F909D4C00B281DA /* stb_image_write.h */,
-				B5EC02041F909D4C00B281DA /* stbi_DDS.h */,
-				B5EC02051F909D4C00B281DA /* stbi_DDS_c.h */,
-				B5EC02061F909D4C00B281DA /* stbi_ext.h */,
-				B5EC02071F909D4C00B281DA /* stbi_ext_c.h */,
-				B5EC02081F909D4C00B281DA /* stbi_pkm.h */,
-				B5EC02091F909D4C00B281DA /* stbi_pkm_c.h */,
-				B5EC020A1F909D4C00B281DA /* stbi_pvr.h */,
-				B5EC020B1F909D4C00B281DA /* stbi_pvr_c.h */,
-			);
-			path = SOIL2;
 			sourceTree = "<group>";
 		};
 		B5F27EE01F8D52830075E0D6 = {
@@ -167,7 +112,6 @@
 			isa = PBXGroup;
 			children = (
 				B5F27EE91F8D52830075E0D6 /* GLFW OpenGL */,
-				B56EFCDE1F9088B60092186E /* Camera */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -183,27 +127,37 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		B5FE967A1F9130D700C9FBB7 /* SOIL2 */ = {
+			isa = PBXGroup;
+			children = (
+				B5FE967B1F9130D700C9FBB7 /* etc1_utils.c */,
+				B5FE967C1F9130D700C9FBB7 /* etc1_utils.h */,
+				B5FE967D1F9130D700C9FBB7 /* image_DXT.c */,
+				B5FE967E1F9130D700C9FBB7 /* image_DXT.h */,
+				B5FE967F1F9130D700C9FBB7 /* image_helper.c */,
+				B5FE96801F9130D700C9FBB7 /* image_helper.h */,
+				B5FE96811F9130D700C9FBB7 /* jo_jpeg.h */,
+				B5FE96821F9130D700C9FBB7 /* pkm_helper.h */,
+				B5FE96831F9130D700C9FBB7 /* pvr_helper.h */,
+				B5FE96841F9130D700C9FBB7 /* SOIL2.c */,
+				B5FE96851F9130D700C9FBB7 /* SOIL2.h */,
+				B5FE96861F9130D700C9FBB7 /* stb_image.h */,
+				B5FE96871F9130D700C9FBB7 /* stb_image_write.h */,
+				B5FE96881F9130D700C9FBB7 /* stbi_DDS.h */,
+				B5FE96891F9130D700C9FBB7 /* stbi_DDS_c.h */,
+				B5FE968A1F9130D700C9FBB7 /* stbi_ext.h */,
+				B5FE968B1F9130D700C9FBB7 /* stbi_ext_c.h */,
+				B5FE968C1F9130D700C9FBB7 /* stbi_pkm.h */,
+				B5FE968D1F9130D700C9FBB7 /* stbi_pkm_c.h */,
+				B5FE968E1F9130D700C9FBB7 /* stbi_pvr.h */,
+				B5FE968F1F9130D700C9FBB7 /* stbi_pvr_c.h */,
+			);
+			path = SOIL2;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		B56EFCD31F9088B60092186E /* Camera */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = B56EFCDB1F9088B60092186E /* Build configuration list for PBXNativeTarget "Camera" */;
-			buildPhases = (
-				B56EFCD41F9088B60092186E /* Sources */,
-				B56EFCD51F9088B60092186E /* Frameworks */,
-				B56EFCD91F9088B60092186E /* CopyFiles */,
-				B56EFCDA1F9088B60092186E /* CopyFiles */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = Camera;
-			productName = "GLFW OpenGL";
-			productReference = B56EFCDE1F9088B60092186E /* Camera */;
-			productType = "com.apple.product-type.tool";
-		};
 		B5F27EE81F8D52830075E0D6 /* GLFW OpenGL */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = B5F27EF01F8D52830075E0D6 /* Build configuration list for PBXNativeTarget "GLFW OpenGL" */;
@@ -231,9 +185,6 @@
 				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = "JP Mackel";
 				TargetAttributes = {
-					B56EFCD31F9088B60092186E = {
-						ProvisioningStyle = Automatic;
-					};
 					B5F27EE81F8D52830075E0D6 = {
 						CreatedOnToolsVersion = 9.0;
 						ProvisioningStyle = Automatic;
@@ -253,59 +204,26 @@
 			projectRoot = "";
 			targets = (
 				B5F27EE81F8D52830075E0D6 /* GLFW OpenGL */,
-				B56EFCD31F9088B60092186E /* Camera */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		B56EFCD41F9088B60092186E /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		B5F27EE51F8D52830075E0D6 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B5FE96901F9130D700C9FBB7 /* etc1_utils.c in Sources */,
+				B5FE96921F9130D700C9FBB7 /* image_helper.c in Sources */,
+				B5FE96771F91305700C9FBB7 /* main.cpp in Sources */,
+				B5FE96931F9130D700C9FBB7 /* SOIL2.c in Sources */,
+				B5FE96911F9130D700C9FBB7 /* image_DXT.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		B56EFCDC1F9088B60092186E /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				HEADER_SEARCH_PATHS = /usr/local/include;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					/usr/local/Cellar/glew/2.1.0/lib,
-					/usr/local/Cellar/glfw/3.2.1/lib,
-					/usr/local/Cellar/gdbm/1.13/lib,
-				);
-				PRODUCT_NAME = "${TARGET_NAME}";
-			};
-			name = Debug;
-		};
-		B56EFCDD1F9088B60092186E /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				HEADER_SEARCH_PATHS = /usr/local/include;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					/usr/local/Cellar/glew/2.1.0/lib,
-					/usr/local/Cellar/glfw/3.2.1/lib,
-					/usr/local/Cellar/gdbm/1.13/lib,
-				);
-				PRODUCT_NAME = "${TARGET_NAME}";
-			};
-			name = Release;
-		};
 		B5F27EEE1F8D52830075E0D6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -440,15 +358,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		B56EFCDB1F9088B60092186E /* Build configuration list for PBXNativeTarget "Camera" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				B56EFCDC1F9088B60092186E /* Debug */,
-				B56EFCDD1F9088B60092186E /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		B5F27EE41F8D52830075E0D6 /* Build configuration list for PBXProject "OpenGL Practice" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
