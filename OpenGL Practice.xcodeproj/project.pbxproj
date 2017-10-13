@@ -13,6 +13,7 @@
 		B5114C8A1F908F9200393AB9 /* libglfw.3.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B5114C821F908E8A00393AB9 /* libglfw.3.2.dylib */; };
 		B56EFCD81F9088B60092186E /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5F27EF41F8D52C50075E0D6 /* OpenGL.framework */; };
 		B5F27EF51F8D52C50075E0D6 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5F27EF41F8D52C50075E0D6 /* OpenGL.framework */; };
+		B5FE96761F90A47900C9FBB7 /* resources in CopyFiles */ = {isa = PBXBuildFile; fileRef = B5EC020C1F909D5F00B281DA /* resources */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -49,6 +50,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
+				B5FE96761F90A47900C9FBB7 /* resources in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
