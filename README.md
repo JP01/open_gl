@@ -19,3 +19,7 @@ Create a Perspective view of a rotating cube.</br>
 ### 5. "Camera"
 Implement a user controlled camera that allows movement through the world.</br>
 ![](https://image.ibb.co/goa1BG/Camera_Movement.gif)
+
+### 6. "Colors"
+Create a lamp and box of different colors, ready for lighting.</br>
+![]("https://preview.ibb.co/jEgq6G/Colors.gif")
