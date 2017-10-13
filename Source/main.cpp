@@ -20,7 +20,7 @@
 #include "Camera.h"
 
 // Window dimensions
-const GLint WIDTH = 400, HEIGHT = 300;
+const GLint WIDTH = 800, HEIGHT = 600;
 int SCREEN_WIDTH, SCREEN_HEIGHT;
 
 // Controls
