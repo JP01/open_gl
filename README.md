@@ -23,7 +23,7 @@ Implement a user controlled camera that allows movement through the world.</br>
 Create a lamp and box of different colors, ready for lighting.</br>
 ![](ScreenGrabs/colors.gif)
 
-### 7. <a href=https://github.com/JP01/open_gl">"Basic Lighting"</a>
+### 7. <a href="https://github.com/JP01/open_gl">"Basic Lighting"</a>
 Create a scene with ambient, diffuse and specular lighting.</br>
 ![](ScreenGrabs/basic_lighting.gif)
 
