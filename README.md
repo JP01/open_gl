@@ -15,3 +15,7 @@ Translate and Rotate a textured object.</br>
 ### 4. "Projections and Coordinate system"
 Create a Perspective view of a rotating cube.</br>
 ![](https://image.ibb.co/jMptqb/projections.gif)
+
+### 5. "Camera"
+Implement a user controlled camera that allows movement through the world.</br>
+![](https://image.ibb.co/goa1BG/Camera_Movement.gif)
