@@ -108,6 +108,11 @@ public:
         return this->zoom;
     }
     
+    glm::vec3 GetPosition()
+    {
+        return this->position;
+    }
+    
 private:
     glm::vec3 position;
     glm::vec3 front;

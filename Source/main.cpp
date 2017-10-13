@@ -20,7 +20,7 @@
 #include "Camera.h"
 
 // Window dimensions
-const GLint WIDTH = 800, HEIGHT = 600;
+const GLint WIDTH = 400, HEIGHT = 300;
 int SCREEN_WIDTH, SCREEN_HEIGHT;
 
 // Controls
@@ -38,7 +38,7 @@ GLfloat deltaTime = 0.0f;
 GLfloat lastFrame = 0.0f;
 
 // Lights
-glm::vec3 lightPos(1.2f, 1.0f, 2.0f);
+glm::vec3 lightPos(0.0f, 0.0f, 0.0f);
 
 int main()
 {
@@ -53,7 +53,7 @@ int main()
     glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
     
     // Create a GLFW window object that we can use for GLFW functions
-    GLFWwindow *window = glfwCreateWindow(WIDTH, HEIGHT, "Colors", nullptr, nullptr);
+    GLFWwindow *window = glfwCreateWindow(WIDTH, HEIGHT, "Basic Lighting", nullptr, nullptr);
     
     glfwGetFramebufferSize(window, &SCREEN_WIDTH, &SCREEN_HEIGHT);  // Adjust width/height for high res screens eg 4k/retina
     
@@ -95,47 +95,47 @@ int main()
     
     // Setup vertex data, buffers and attribute pointers
     GLfloat vertices[] = {
-        -0.5f, -0.5f, -0.5f,
-        0.5f, -0.5f, -0.5f,
-        0.5f,  0.5f, -0.5f,
-        0.5f,  0.5f, -0.5f,
-        -0.5f,  0.5f, -0.5f,
-        -0.5f, -0.5f, -0.5f,
+        -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+        0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+        0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+        0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+        -0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+        -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
         
-        -0.5f, -0.5f,  0.5f,
-        0.5f, -0.5f,  0.5f,
-        0.5f,  0.5f,  0.5f,
-        0.5f,  0.5f,  0.5f,
-        -0.5f,  0.5f,  0.5f,
-        -0.5f, -0.5f,  0.5f,
+        -0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
+        0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
+        0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
+        0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
+        -0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
+        -0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
         
-        -0.5f,  0.5f,  0.5f,
-        -0.5f,  0.5f, -0.5f,
-        -0.5f, -0.5f, -0.5f,
-        -0.5f, -0.5f, -0.5f,
-        -0.5f, -0.5f,  0.5f,
-        -0.5f,  0.5f,  0.5f,
+        -0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
+        -0.5f,  0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
+        -0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
+        -0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
+        -0.5f, -0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
+        -0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
         
-        0.5f,  0.5f,  0.5f,
-        0.5f,  0.5f, -0.5f,
-        0.5f, -0.5f, -0.5f,
-        0.5f, -0.5f, -0.5f,
-        0.5f, -0.5f,  0.5f,
-        0.5f,  0.5f,  0.5f,
+        0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
+        0.5f,  0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
+        0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
+        0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
+        0.5f, -0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
+        0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
         
-        -0.5f, -0.5f, -0.5f,
-        0.5f, -0.5f, -0.5f,
-        0.5f, -0.5f,  0.5f,
-        0.5f, -0.5f,  0.5f,
-        -0.5f, -0.5f,  0.5f,
-        -0.5f, -0.5f, -0.5f,
+        -0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
+        0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
+        0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
+        0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
+        -0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
+        -0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
         
-        -0.5f,  0.5f, -0.5f,
-        0.5f,  0.5f, -0.5f,
-        0.5f,  0.5f,  0.5f,
-        0.5f,  0.5f,  0.5f,
-        -0.5f,  0.5f,  0.5f,
-        -0.5f,  0.5f, -0.5f,
+        -0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,
+        0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,
+        0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
+        0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
+        -0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
+        -0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f
     };
     
     // Create vertex buffer, array objects, element buffer
@@ -150,8 +150,12 @@ int main()
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
     // Position attribute
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 *sizeof(GLfloat), (GLvoid *) 0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 *sizeof(GLfloat), (GLvoid *) 0);
     glEnableVertexAttribArray(0);
+    
+    // Normal attribute
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 *sizeof(GLfloat), (GLvoid *) (3 * sizeof(GLfloat)));
+    glEnableVertexAttribArray(1);
     
     glBindVertexArray(0); // Unbind VAO
     
@@ -166,7 +170,7 @@ int main()
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
     
     // Position attribute
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 *sizeof(GLfloat), (GLvoid *) 0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 *sizeof(GLfloat), (GLvoid *) 0);
     glEnableVertexAttribArray(0);
     
     glBindVertexArray(0); // Unbind VAO
@@ -193,8 +197,12 @@ int main()
         lightingShader.Use();
         GLint objectColorLoc = glGetUniformLocation(lightingShader.Program, "objectColor");
         GLint lightColorLoc = glGetUniformLocation(lightingShader.Program, "lightColor");
+        GLint lightPosLoc = glGetUniformLocation(lightingShader.Program, "lightPos");
+        GLint viewPosLoc = glGetUniformLocation(lightingShader.Program, "viewPos");
         glUniform3f(objectColorLoc, 1.0f, 0.5f, 0.31f);
-        glUniform3f(lightColorLoc, 1.0f, 0.5f, 1.0f);
+        glUniform3f(lightColorLoc, 1.0f, 1.0f, 1.0f);
+        glUniform3f(lightPosLoc, lightPos.x, lightPos.y, lightPos.z);
+        glUniform3f(viewPosLoc, camera.GetPosition().x, camera.GetPosition().y, camera.GetPosition().z);
         
         glm::mat4 view = camera.GetViewMatrix();
         
@@ -207,6 +215,10 @@ int main()
         
         glBindVertexArray(boxVAO);
         glm::mat4 model;
+        glm::vec3 boxPos = glm::vec3(3.0f * sin(currentFrame/2.0f), 0.0f, 3.0f * cos(currentFrame/2.0f));
+        model = glm::translate(model, boxPos);
+        model = glm::rotate(model, currentFrame * 1.0f, glm::vec3(0.2f, 0.2f, 0.3f));
+        
         glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
         glBindVertexArray(boxVAO);
         glDrawArrays(GL_TRIANGLES, 0, 36);
@@ -222,7 +234,6 @@ int main()
         glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
         glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
         
-
         model = glm::mat4();
         model = glm::translate(model, lightPos);
         model = glm::scale(model, glm::vec3(0.2f)); // shrink lamp to 20% in all directions
