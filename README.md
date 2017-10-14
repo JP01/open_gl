@@ -28,6 +28,6 @@ Create a scene with ambient, diffuse and specular lighting.</br>
 ![](ScreenGrabs/basic_lighting.gif)
 
 ### 8. <a href="https://github.com/JP01/open_gl">"Materials"</a>
-Create a box with variable material properties.
+Create a box with variable material properties.</br>
 ![](ScreenGrabs/materials.gif)
 
