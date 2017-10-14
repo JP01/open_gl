@@ -1,4 +1,6 @@
 # OpenGL Playground
+Tracking my progress learning OpenGL. Using a number of online articles and tutorials. Broken into manageable sections with a self assigned task to be completed for each section.
+
 ### 1. <a href="https://github.com/JP01/open_gl/tree/fc28d2dd477351f55deafaa4beb229a56c269324">"Hello Triangle"</a>
 Show a triangle on screen with RGB and interpolated coloring.</br>
 <img src="ScreenGrabs/hello_triangle.png" width=400 height=300/>
@@ -27,7 +29,10 @@ Create a lamp and box of different colors, ready for lighting.</br>
 Create a scene with ambient, diffuse and specular lighting.</br>
 ![](ScreenGrabs/basic_lighting.gif)
 
-### 8. <a href="https://github.com/JP01/open_gl">"Materials"</a>
+### 8. <a href="https://github.com/JP01/open_gl/tree/c51a8e090c02e2f3c0ebebe09064ca0820b80047">"Materials"</a>
 Create a box with variable material properties.</br>
 ![](ScreenGrabs/materials.gif)
 
+### 9. <a href="https://github.com/JP01/open_gl">"Lighting Maps"</a>
+Create a box which uses diffuse/specular maps to add highlights to specific sections. (ie. iron rim should reflect more than wooden body)</br>
+![](ScreenGrabs/lighting_maps.gif)
