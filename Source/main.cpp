@@ -38,7 +38,7 @@ GLfloat deltaTime = 0.0f;
 GLfloat lastFrame = 0.0f;
 
 // Lights
-glm::vec3 lightPos(0.0f, 0.0f, 0.0f);
+glm::vec3 lightPos(1.0f, 1.5f, 1.0f);
 
 int main()
 {
@@ -195,14 +195,28 @@ int main()
         
         // Box
         lightingShader.Use();
-        GLint objectColorLoc = glGetUniformLocation(lightingShader.Program, "objectColor");
-        GLint lightColorLoc = glGetUniformLocation(lightingShader.Program, "lightColor");
-        GLint lightPosLoc = glGetUniformLocation(lightingShader.Program, "lightPos");
+        GLint lightPosLoc = glGetUniformLocation(lightingShader.Program, "light.position");
         GLint viewPosLoc = glGetUniformLocation(lightingShader.Program, "viewPos");
-        glUniform3f(objectColorLoc, 1.0f, 0.5f, 0.31f);
-        glUniform3f(lightColorLoc, 1.0f, 1.0f, 1.0f);
         glUniform3f(lightPosLoc, lightPos.x, lightPos.y, lightPos.z);
         glUniform3f(viewPosLoc, camera.GetPosition().x, camera.GetPosition().y, camera.GetPosition().z);
+        
+        // light properties
+        glm::vec3 lightColor;
+        lightColor.r = sin(currentFrame * 2.0f);
+        lightColor.g = sin(currentFrame * 0.7f);
+        lightColor.b = sin(currentFrame * 1.3f);
+        glm::vec3 diffuseColor = lightColor * glm::vec3(0.5f);
+        glm::vec3 ambientColor = diffuseColor * glm::vec3(0.2f);
+        glm::vec3 specularColor = glm::vec3(1.0f, 1.0f, 1.0f);
+        lightingShader.setVec3("light.ambient", ambientColor);
+        lightingShader.setVec3("light.diffuse", diffuseColor);
+        lightingShader.setVec3("light.specular", specularColor);
+        
+        // material properties
+        lightingShader.setVec3("material.ambient", glm::vec3(1.0f, 0.5f, 0.31f));
+        lightingShader.setVec3("material.diffuse", glm::vec3(1.0f, 0.5f, 0.31f));
+        lightingShader.setVec3("material.specular", glm::vec3(0.55f, 0.55f, 0.55f));
+        lightingShader.setFloat("material.shininess", 128.0f * 0.25);
         
         glm::mat4 view = camera.GetViewMatrix();
         
@@ -215,8 +229,8 @@ int main()
         
         glBindVertexArray(boxVAO);
         glm::mat4 model;
-        glm::vec3 boxPos = glm::vec3(3.0f * sin(currentFrame/2.0f), 0.0f, 3.0f * cos(currentFrame/2.0f));
-        model = glm::translate(model, boxPos);
+        //glm::vec3 boxPos = glm::vec3(3.0f * sin(currentFrame/2.0f), 0.0f, 3.0f * cos(currentFrame/2.0f));
+        //model = glm::translate(model, boxPos);
         model = glm::rotate(model, currentFrame * 1.0f, glm::vec3(0.2f, 0.2f, 0.3f));
         
         glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
@@ -296,11 +310,13 @@ void KeyCallback(GLFWwindow *window, int key, int scancode, int action, int mode
 
 void MouseCallback(GLFWwindow *window, double xPos, double yPos)
 {
+    // use the coordinates of mouse as it enters the screen
     if (firstMouse) {
         lastX = xPos;
         lastY = yPos;
         firstMouse = false;
     }
+    // Update mouse
     GLfloat xOffset = xPos - lastX;
     GLfloat yOffset = lastY - yPos;
     

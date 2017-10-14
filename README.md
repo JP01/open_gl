@@ -23,8 +23,11 @@ Implement a user controlled camera that allows movement through the world.</br>
 Create a lamp and box of different colors, ready for lighting.</br>
 ![](ScreenGrabs/colors.gif)
 
-### 7. <a href="https://github.com/JP01/open_gl">"Basic Lighting"</a>
+### 7. <a href="https://github.com/JP01/open_gl/tree/01cce650e7d5def4a60a4c6638920438368d9a7f">"Basic Lighting"</a>
 Create a scene with ambient, diffuse and specular lighting.</br>
 ![](ScreenGrabs/basic_lighting.gif)
 
+### 8. <a href="https://github.com/JP01/open_gl">"Materials"</a>
+Create a box with variable material properties.
+![](ScreenGrabs/materials.gif)
 
