@@ -33,6 +33,10 @@ Create a scene with ambient, diffuse and specular lighting.</br>
 Create a box with variable material properties.</br>
 ![](ScreenGrabs/materials.gif)
 
-### 9. <a href="https://github.com/JP01/open_gl">"Lighting Maps"</a>
+### 9. <a href="https://github.com/JP01/open_gl/tree/348c1b37e6c871755bc1fa7be580d47debb2aedb">"Lighting Maps"</a>
 Create a box which uses diffuse/specular maps to add highlights to specific sections. (ie. iron rim should reflect more than wooden body)</br>
 ![](ScreenGrabs/lighting_maps.gif)
+
+### 10. <a href=https://github.com/JP01/open_gl">"Multiple Lights"</a>
+Create a scene with directional, spot(attached to camera) and multiple point lights.</br>
+![](ScreenGrabs/multiple_lights.gif)

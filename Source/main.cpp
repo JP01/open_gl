@@ -20,7 +20,7 @@
 #include "Camera.h"
 
 // Window dimensions
-const GLint WIDTH = 800, HEIGHT = 600;
+const GLint WIDTH = 400, HEIGHT = 300;
 int SCREEN_WIDTH, SCREEN_HEIGHT;
 
 // Controls
@@ -28,7 +28,7 @@ void KeyCallback(GLFWwindow *window, int key, int scancode, int action, int mode
 void MouseCallback(GLFWwindow *window, double xPos, double yPos);
 void DoMovement();
 
-Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
+Camera camera(glm::vec3(0.0f, 0.0f, 6.0f));
 GLfloat lastX = WIDTH/2.0f;
 GLfloat lastY = HEIGHT/2.0f;
 bool keys[1024];
@@ -38,7 +38,7 @@ GLfloat deltaTime = 0.0f;
 GLfloat lastFrame = 0.0f;
 
 // Lights
-glm::vec3 lightPos(1.0f, 1.5f, 1.0f);
+glm::vec3 lightPos(0.0f, 1.5f, 20.0f);
 
 int main()
 {
@@ -53,7 +53,7 @@ int main()
     glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
     
     // Create a GLFW window object that we can use for GLFW functions
-    GLFWwindow *window = glfwCreateWindow(WIDTH, HEIGHT, "Lighting Maps", nullptr, nullptr);
+    GLFWwindow *window = glfwCreateWindow(WIDTH, HEIGHT, "Multiple Lights", nullptr, nullptr);
     
     glfwGetFramebufferSize(window, &SCREEN_WIDTH, &SCREEN_HEIGHT);  // Adjust width/height for high res screens eg 4k/retina
     
@@ -139,14 +139,34 @@ int main()
         -0.5f,  0.5f, -0.5f,   0.0f,  1.0f,  0.0f,    0.0f,  1.0f
     };
     
+    glm::vec3 cubePositions[] = {
+        glm::vec3( 0.0f,  0.0f,  0.0f),
+        glm::vec3( 2.0f,  5.0f, -15.0f),
+        glm::vec3(-1.5f, -2.2f, -2.5f),
+        glm::vec3(-3.8f, -2.0f, -12.3f),
+        glm::vec3( 2.4f, -0.4f, -3.5f),
+        glm::vec3(-1.7f,  3.0f, -7.5f),
+        glm::vec3( 1.3f, -2.0f, -2.5f),
+        glm::vec3( 1.5f,  2.0f, -2.5f),
+        glm::vec3( 1.5f,  0.2f, -1.5f),
+        glm::vec3(-1.3f,  1.0f, -1.5f)
+    };
+    
+    glm::vec3 pointLightPositions[] = {
+        glm::vec3(0.7f, 0.2f, 2.0f),
+        glm::vec3(2.3f, -3.3f, -4.0f),
+        glm::vec3(-4.0f, 2.0f, -12.0f),
+        glm::vec3(0.0f, 0.0f, -3.0f)
+    };
+    
     // Create vertex buffer, array objects, element buffer
     // Box
     GLuint VBO, boxVAO;
     glGenVertexArrays(1, &boxVAO);
     glGenBuffers(1, &VBO);
+    
     // Bind Vertex Array Object first, then bind and set vertex buffers and attr pointers
     glBindVertexArray(boxVAO);
-    
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
@@ -167,12 +187,9 @@ int main()
     // Lamp
     GLuint lightVAO;
     glGenVertexArrays(1, &lightVAO);
-    glGenBuffers(1, &VBO);
     // Bind Vertex Array Object first, then bind and set vertex buffers and attr pointers
     glBindVertexArray(lightVAO);
-    
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
     
     // Position attribute
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 *sizeof(GLfloat), (GLvoid *) 0);
@@ -181,9 +198,10 @@ int main()
     glBindVertexArray(0); // Unbind VAO
     
     // Texture ///////////////////////////////
-    GLuint diffuseMap, specularMap;
+    GLuint diffuseMap, specularMap, emissionMap;
     glGenTextures(1, &diffuseMap);
     glGenTextures(1, &specularMap);
+    glGenTextures(1, &emissionMap);
     
     int textureWidth, textureHeight;
     unsigned char *image;
@@ -234,65 +252,116 @@ int main()
         glClearColor(0.15f, 0.15f, 0.15f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         
-        // Box
         lightingShader.Use();
-        GLint lightPosLoc = glGetUniformLocation(lightingShader.Program, "light.position");
         GLint viewPosLoc = glGetUniformLocation(lightingShader.Program, "viewPos");
-        glUniform3f(lightPosLoc, lightPos.x, lightPos.y, lightPos.z);
         glUniform3f(viewPosLoc, camera.GetPosition().x, camera.GetPosition().y, camera.GetPosition().z);
-        
-        // light properties
-        lightingShader.setVec3("light.ambient", glm::vec3(0.2f));
-        lightingShader.setVec3("light.diffuse", glm::vec3(0.5f));
-        lightingShader.setVec3("light.specular", glm::vec3(1.0f));
-        
-        // material properties
         lightingShader.setFloat("material.shininess", 32.0f);
         
+        // Directional Light
+        lightingShader.setVec3("dirLight.direction", glm::vec3(-0.2f, -1.0f, -0.3f));
+        lightingShader.setVec3("dirLight.ambient", glm::vec3(0.05f));
+        lightingShader.setVec3("dirLight.diffuse", glm::vec3(0.2f));
+        lightingShader.setVec3("dirLight.specular", glm::vec3(0.3f));
+        
+        // Point lights
+        for(GLint i = 0; i < sizeof(pointLightPositions)/sizeof(pointLightPositions[0]); i++)
+        {
+            std::string index, pos, amb, dif, spec, con, lin, quad;
+            index = std::to_string(i);
+            pos = "pointLights[" + index + "].position";
+            amb = "pointLights[" + index + "].ambient";
+            dif = "pointLights[" + index + "].diffuse";
+            spec = "pointLights[" + index + "].specular";
+            con = "pointLights[" + index+ "].constant";
+            lin = "pointLights[" + index + "].linear";
+            quad = "pointLights[" + index + "].quadratic";
+            
+            lightingShader.setVec3(pos, pointLightPositions[i]);
+            lightingShader.setVec3(amb, glm::vec3(0.05f));
+            lightingShader.setVec3(dif, glm::vec3(0.4f));
+            lightingShader.setVec3(spec, glm::vec3(0.8f));
+            lightingShader.setFloat(con, 1.0f);
+            lightingShader.setFloat(lin, 0.09f);
+            lightingShader.setFloat(quad, 0.0032f);
+        }
+        
+        // Spot Light
+        lightingShader.setVec3("spotLight.position", camera.GetPosition());
+        lightingShader.setVec3("spotLight.direction", camera.GetFront());
+        lightingShader.setVec3("spotLight.ambient", glm::vec3(0.0f));
+        lightingShader.setVec3("spotLight.diffuse", glm::vec3(0.5f));
+        lightingShader.setVec3("spotLight.specular", glm::vec3(1.0f));
+        lightingShader.setFloat("spotLight.constant", 1.0f);
+        lightingShader.setFloat("spotLight.linear", 0.09f);
+        lightingShader.setFloat("spotLight.quadratic", 0.0032f);
+        lightingShader.setFloat("spotLight.cutOff", glm::cos(glm::radians(6.0f)));
+        lightingShader.setFloat("spotLight.outerCutOff", glm::cos(glm::radians(6.5f)));
+        
+        // Create camera transformations
         glm::mat4 view = camera.GetViewMatrix();
         
+        // get uniform locations
         GLint modelLoc = glGetUniformLocation(lightingShader.Program, "model");
         GLint viewLoc = glGetUniformLocation(lightingShader.Program, "view");
         GLint projLoc = glGetUniformLocation(lightingShader.Program, "projection");
-        
+        // Pass the matrices to shader
         glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
         glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
         
+        // Bind diffuse and specular maps
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, diffuseMap);
         glActiveTexture(GL_TEXTURE1);
         glBindTexture(GL_TEXTURE_2D, specularMap);
         
-        glBindVertexArray(boxVAO);
+        // Draw the 10 containers
         glm::mat4 model;
-        //glm::vec3 boxPos = glm::vec3(3.0f * sin(currentFrame/2.0f), 0.0f, 3.0f * cos(currentFrame/2.0f));
-        //model = glm::translate(model, boxPos);
-        model = glm::rotate(model, currentFrame * 1.0f, glm::vec3(0.7f, 0.5f, 0.3f));
-        
-        glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
         glBindVertexArray(boxVAO);
-        glDrawArrays(GL_TRIANGLES, 0, 36);
+        for(GLuint i = 0; i < 10; i++)
+        {
+            model = glm::mat4();
+            model = glm::translate(model, cubePositions[i]);
+            //glm::vec3 boxPos = glm::vec3(3.0f * sin(currentFrame/2.0f), 0.0f, 3.0f * cos(currentFrame/2.0f));
+            //model = glm::translate(model, boxPos);
+            model = glm::rotate(model, currentFrame * 2.0f/i, glm::vec3(0.7f, 0.5f, 0.3f));
+            GLfloat angle = 20.0f * i;
+            model = glm::rotate(model, glm::radians(angle), glm::vec3(1.0f, 0.3f, 0.5f));
+            glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+            glDrawArrays(GL_TRIANGLES, 0, 36);
+        }
         glBindVertexArray(0);
         
-        // Lamp
+        // Draw lamp, binding shader
         lampShader.Use();
-        
         modelLoc = glGetUniformLocation(lampShader.Program, "model");
         viewLoc = glGetUniformLocation(lampShader.Program, "view");
         projLoc = glGetUniformLocation(lampShader.Program, "projection");
-        
+        // set matricies
         glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
         glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
-        
         model = glm::mat4();
         model = glm::translate(model, lightPos);
         model = glm::scale(model, glm::vec3(0.2f)); // shrink lamp to 20% in all directions
         glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
-        
         glBindVertexArray(lightVAO);
         glDrawArrays(GL_TRIANGLES, 0, 36);
         glBindVertexArray(0);
-     
+        
+        // Point Lights
+        glBindVertexArray(lightVAO);
+        for(GLuint i = 0; i < sizeof(pointLightPositions)/sizeof(pointLightPositions[0]); i++)
+        {
+            pointLightPositions[i].x += 0.05f * glm::sin(currentFrame + 2*i);
+            pointLightPositions[i].y += 0.05f * glm::sin(currentFrame + i);
+            pointLightPositions[i].z += 0.15f * glm::cos(currentFrame - 2*i);
+            model = glm::mat4();
+            model = glm::translate(model, pointLightPositions[i]);
+            model = glm::scale(model, glm::vec3(0.2f)); // shrink lamp to 20% in all directions
+            glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+            glDrawArrays(GL_TRIANGLES, 0, 36);
+        }
+        glBindVertexArray(0);
+
         // Swap the screen buffers
         glfwSwapBuffers(window);
     }
@@ -361,3 +430,4 @@ void MouseCallback(GLFWwindow *window, double xPos, double yPos)
     
     camera.ProcessMouseMovement(xOffset, yOffset);
 }
+
