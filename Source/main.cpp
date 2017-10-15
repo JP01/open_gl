@@ -20,7 +20,7 @@
 #include "Camera.h"
 
 // Window dimensions
-const GLint WIDTH = 400, HEIGHT = 300;
+const GLint WIDTH = 800, HEIGHT = 600;
 int SCREEN_WIDTH, SCREEN_HEIGHT;
 
 // Controls
@@ -323,7 +323,7 @@ int main()
             model = glm::translate(model, cubePositions[i]);
             //glm::vec3 boxPos = glm::vec3(3.0f * sin(currentFrame/2.0f), 0.0f, 3.0f * cos(currentFrame/2.0f));
             //model = glm::translate(model, boxPos);
-            model = glm::rotate(model, currentFrame * 2.0f/i, glm::vec3(0.7f, 0.5f, 0.3f));
+            model = glm::rotate(model, currentFrame * 1.0f/i, glm::vec3(0.7f, 0.5f, 0.3f));
             GLfloat angle = 20.0f * i;
             model = glm::rotate(model, glm::radians(angle), glm::vec3(1.0f, 0.3f, 0.5f));
             glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
@@ -351,9 +351,9 @@ int main()
         glBindVertexArray(lightVAO);
         for(GLuint i = 0; i < sizeof(pointLightPositions)/sizeof(pointLightPositions[0]); i++)
         {
-            pointLightPositions[i].x += 0.05f * glm::sin(currentFrame + 2*i);
-            pointLightPositions[i].y += 0.05f * glm::sin(currentFrame + i);
-            pointLightPositions[i].z += 0.15f * glm::cos(currentFrame - 2*i);
+            pointLightPositions[i].x += 0.05f * glm::sin(currentFrame + i);
+            pointLightPositions[i].y += 0.05f * glm::sin(currentFrame + i/2);
+            pointLightPositions[i].z += 0.1f * glm::cos(currentFrame - i);
             model = glm::mat4();
             model = glm::translate(model, pointLightPositions[i]);
             model = glm::scale(model, glm::vec3(0.2f)); // shrink lamp to 20% in all directions
