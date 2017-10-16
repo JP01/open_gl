@@ -1,13 +1,119 @@
-//
-//  Mesh.h
-//  GLFW OpenGL
-//
-//  Created by JP Mackel on 15/10/2017.
-//  Copyright © 2017 JP Mackel. All rights reserved.
-//
+#pragma once
 
-#ifndef Mesh_h
-#define Mesh_h
+#include <string>
+#include <fstream>
+#include <iostream>
+#include <vector>
 
+#include <GL/glew.h>
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 
-#endif /* Mesh_h */
+#include <assimp/scene.h>
+
+#include "Shader.h"
+
+struct Vertex
+{
+    glm::vec3 Position;
+    glm::vec3 Normal;
+    glm::vec2 TexCoords;
+};
+
+struct Texture
+{
+    GLuint Id;
+    std::string Type;
+    aiString Path;
+};
+
+class Mesh
+{
+public:
+    std::vector<Vertex> vertices;
+    std::vector<GLuint> indices;
+    std::vector<Texture> textures;
+    
+    Mesh(std::vector<Vertex> &vertices, std::vector<GLuint> &indices, std::vector<Texture> &textures)
+    : vertices(vertices)
+    , indices(indices)
+    , textures(textures)
+    {
+        setupMesh();
+    }
+    
+    void Draw(Shader shader)
+    {
+        GLuint diffuseNr = 1;
+        GLuint specularNr = 1;
+        
+        for (GLuint i = 0; i < this->textures.size(); i++)
+        {
+            glActiveTexture(GL_TEXTURE0 + i); // activate correct texture unit
+            // retrieve texture number, N
+            std::string number;
+            std::string name = this->textures[i].Type;
+            
+            // Assume texture filenames of the form texture_diffuseN and texture_specularN:
+            // e.g. texture_diffuse1, texture_diffuse2, texture_specular1
+            if ("texture_diffuse" == name)
+                number = std::to_string(diffuseNr++);
+            else if ("texture_specular" == name)
+                number = std::to_string(specularNr++);
+            
+            shader.setInt(("material." + name + number).c_str(), i);
+            glBindTexture(GL_TEXTURE_2D, this->textures[i].Id);
+        }
+        
+        shader.setFloat("material.shininess", 16.0f);
+        
+        glBindVertexArray(this->VAO);
+        glDrawElements(GL_TRIANGLES, this->indices.size(), GL_UNSIGNED_INT, 0);
+        glBindVertexArray(0);
+        
+        // Clean up and unbind
+        for (GLuint i = 0; i < this->textures.size(); i++)
+        {
+            glActiveTexture(GL_TEXTURE0 + i);
+            glBindTexture(GL_TEXTURE_2D, 0);
+        }
+    }
+    
+private:
+    GLuint VAO, VBO, EBO;
+    
+    void setupMesh()
+    {
+        glGenVertexArrays(1, &this->VAO);
+        glGenBuffers(1, &this->VBO);
+        glGenBuffers(1, &this->EBO);
+        
+        glBindVertexArray(this->VAO);
+        
+        // Load data into buffer
+        glBindBuffer(GL_ARRAY_BUFFER, this->VBO);
+        glBufferData(GL_ARRAY_BUFFER, this->vertices.size() * sizeof(Vertex), &this->vertices[0], GL_STATIC_DRAW);
+        
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->EBO);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, this->indices.size() * sizeof(GLuint), &this->indices[0], GL_STATIC_DRAW);
+        
+        // due to the sequential layout of structs, we can offsetof to get the offset for the elements of Vertex for the AttribPointers.
+        // NB: while c++ POD-struct members are not guaranteed to to be laid out in continuous span of bytes in memory,
+        // sizeof and offsetof automatically include any additional padding, so it's okay!
+        // Vertex positions.
+        glEnableVertexAttribArray(0);
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid *)0);
+        
+        // vertex normals
+        glEnableVertexAttribArray(1);
+        glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid *)offsetof(Vertex, Normal));
+        
+        // vertex texture coordinates
+        glEnableVertexAttribArray(2);
+        glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid *)offsetof(Vertex, TexCoords));
+        
+        glBindVertexArray(0); // unbind
+
+    }
+    
+};

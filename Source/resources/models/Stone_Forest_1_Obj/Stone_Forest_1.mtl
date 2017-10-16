@@ -1,0 +1,13 @@
+# Max2Mtl Version 4.0 Mar 10th, 2001
+#
+newmtl Stone_F_1
+Ka  0.6 0.6 0.6
+Kd  0.6 0.6 0.6
+Ks  0.4 0.4 0.4
+d  0.5
+Ns  0.4
+illum 0.5
+map_Kd S1Diffus.jpg
+map_Bump S1Normal.jpg
+#
+# EOF
